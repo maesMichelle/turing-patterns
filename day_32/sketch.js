@@ -35,50 +35,55 @@ function setup() {
     grid[x] = [];
     next[x] = [];
     for (var y = 0; y < height; y++) {
-      grid[x][y] = { a: 1, b: 0 };
-      next[x][y] = { a: 1, b: 0 };
+      if (Math.random() > 0.95) {
+        grid[x][y] = { a: 1, b: 1 };
+        next[x][y] = { a: 1, b: 0 };
+      } else {
+        grid[x][y] = { a: 1, b: 0 };
+        next[x][y] = { a: 1, b: 0 };
+      }
     }
   }
 
   // hier starten we met de Chemicaliën b toe te voegen
   //in een klein plekje van 10 op 10
   // je kan hier met spelen, vorm veranderen, evnt met silhouetten werken
-  for (var i = 100; i < 300; i++) {
-    for (var j = 100; j < 300; j++) {
-      grid[i][j].b = 1;
-      //console.log();
-    }
-  }
-  for (var i = 300; i < 500; i++) {
-    for (var j = 300; j < 500; j++) {
-      grid[i][j].b = 1;
-      //console.log();
-    }
-  }
-  for (var i = 500; i < 700; i++) {
-    for (var j = 100; j < 300; j++) {
-      grid[i][j].b = 1;
-      //console.log();
-    }
-  }
-  //for (var i = 700; i < 900; i++) {
-  //  for (var j = 300; j < 500; j++) {
-  //    grid[i][j].b = 1;
-  //    //console.log();
-  //  }
-  //}
-  for (var i = 100; i < 300; i++) {
-    for (var j = 500; j < 700; j++) {
-      grid[i][j].b = 1;
-      //console.log();
-    }
-  }
-  for (var i = 500; i < 700; i++) {
-    for (var j = 500; j < 700; j++) {
-      grid[i][j].b = 1;
-      //console.log();
-    }
-  }
+  // for (var i = 100; i < 300; i++) {
+  //   for (var j = 100; j < 300; j++) {
+  //     grid[i][j].b = 1;
+  //     //console.log();
+  //   }
+  // }
+  // for (var i = 300; i < 500; i++) {
+  //   for (var j = 300; j < 500; j++) {
+  //     grid[i][j].b = 1;
+  //     //console.log();
+  //   }
+  // }
+  // for (var i = 500; i < 700; i++) {
+  //   for (var j = 100; j < 300; j++) {
+  //     grid[i][j].b = 1;
+  //     //console.log();
+  //   }
+  // }
+  // //for (var i = 700; i < 900; i++) {
+  // //  for (var j = 300; j < 500; j++) {
+  // //    grid[i][j].b = 1;
+  // //    //console.log();
+  // //  }
+  // //}
+  // for (var i = 100; i < 300; i++) {
+  //   for (var j = 500; j < 700; j++) {
+  //     grid[i][j].b = 1;
+  //     //console.log();
+  //   }
+  // }
+  // for (var i = 500; i < 700; i++) {
+  //   for (var j = 500; j < 700; j++) {
+  //     grid[i][j].b = 1;
+  //     //console.log();
+  //   }
+  // }
 }
 
 // het implementeren van de 'reaction diffusion formula'.
@@ -164,5 +169,41 @@ function swap() {
   next = temp;
 }
 
+let isMouseDown = false;
+
+function onMouseDown(e) {
+  e.preventDefault();
+  isMouseDown = true;
+}
+
+function onMouseUp() {
+  isMouseDown = false;
+}
+
+function onMouseMove(event) {
+  console.log(event.shiftKey);
+  if (!isMouseDown) return;
+
+  const mouseX = event.offsetX;
+  const mouseY = event.offsetY;
+
+  for (var i = mouseX - 10; i < mouseX + 10; i++) {
+    for (var j = mouseY - 10; j < mouseY + 10; j++) {
+      if (i < 0 || i >= width || j < 0 || j >= height) continue;
+      if (event.shiftKey) {
+        grid[i][j].a = 1;
+        grid[i][j].b = 0;
+      } else {
+        grid[i][j].b = 1;
+      }
+    }
+  }
+}
+
 setup();
 draw();
+
+canvas.addEventListener("mousedown", onMouseDown);
+canvas.addEventListener("mouseup", onMouseUp);
+canvas.addEventListener("mousemove", onMouseMove);
+canvas.addEventListener("contextmenu", (e) => e.preventDefault());
