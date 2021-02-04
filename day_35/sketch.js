@@ -3,10 +3,10 @@ var grid;
 var next;
 
 // de waarde die het patroon bepalen
-var dA = 0.8;
-var dB = 0.22;
-var feed = 0.102;
-var kill = 0.055;
+var dA = 0.6;
+var dB = 0.13;
+var feed = 0.051;
+var kill = 0.08;
 
 const canvas = document.getElementById("c");
 const ctx = canvas.getContext("2d");
@@ -142,7 +142,8 @@ function swap() {
 
 let isMouseDouwn = false;
 
-function onMouseDown() {
+function onMouseDown(e) {
+  e.preventDefault();
   isMouseDouwn = true;
 }
 
@@ -151,10 +152,25 @@ function onMouseUp() {
 }
 
 function onMouseMove(event) {
+  console.log(event.shiftKey);
   if (!isMouseDouwn) return;
+
   const mouseX = event.offsetX;
   const mouseY = event.offsetY;
-  grid[mouseX][mouseY].b = 1;
+
+  for (var i = mouseX - 10; i < mouseX + 10; i++) {
+    for (var j = mouseY - 10; j < mouseY + 10; j++) {
+      if (i < 0 || i >= width || j < 0 || j >= height) continue;
+      //grid[i][j].b = 1;
+
+      if (event.shiftKey) {
+        grid[i][j].b = 0;
+      } else {
+        grid[i][j].a = 1;
+        grid[i][j].b = 1;
+      }
+    }
+  }
 }
 
 setup();
@@ -163,4 +179,4 @@ draw();
 canvas.addEventListener("mousedown", onMouseDown);
 canvas.addEventListener("mouseup", onMouseUp);
 canvas.addEventListener("mousemove", onMouseMove);
-//canvas.addEventListener("contextmenu", (e) => e.preventDefault());
+canvas.addEventListener("contextmenu", (e) => e.preventDefault());

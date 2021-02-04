@@ -3,10 +3,10 @@ var grid;
 var next;
 
 // de waarde die het patroon bepalen
-var dA = 0.8;
-var dB = 0.22;
-var feed = 0.102;
-var kill = 0.055;
+var dA = 0.6;
+var dB = 0.13;
+var feed = 0.051;
+var kill = 0.08;
 
 const canvas = document.getElementById("c");
 const ctx = canvas.getContext("2d");
@@ -154,7 +154,15 @@ function onMouseMove(event) {
   if (!isMouseDouwn) return;
   const mouseX = event.offsetX;
   const mouseY = event.offsetY;
-  grid[mouseX][mouseY].b = 1;
+
+  for (var i = mouseX - 5; i < mouseX + 5; i++) {
+    for (var j = mouseY - 5; j < mouseY + 5; j++) {
+      if (i < 0 || i >= width || j < 0 || j >= height) continue;
+      grid[i][j].b = 1;
+      //console.log();
+    }
+  }
+  //grid[mouseX][mouseY].b = 1;
 }
 
 setup();

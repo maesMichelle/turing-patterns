@@ -3,10 +3,10 @@ var grid;
 var next;
 
 // de waarde die het patroon bepalen
-var dA = 0.8;
-var dB = 0.22;
-var feed = 0.102;
-var kill = 0.055;
+var dA = 1;
+var dB = 0.6;
+var feed = 0.015;
+var kill = 0.05;
 
 const canvas = document.getElementById("c");
 const ctx = canvas.getContext("2d");
@@ -35,21 +35,20 @@ function setup() {
     grid[x] = [];
     next[x] = [];
     for (var y = 0; y < height; y++) {
-      //if (Math.random() > 0.95) {
-      grid[x][y] = { a: 1, b: 0 };
-      next[x][y] = { a: 1, b: 0 };
-      //} else {
-      //  grid[x][y] = { a: 1, b: 0 };
-      //  next[x][y] = { a: 1, b: 0 };
-      //}
+      if (Math.random() > 0.95) {
+        grid[x][y] = { a: 1, b: 1 };
+        next[x][y] = { a: 1, b: 0 };
+      } else {
+        grid[x][y] = { a: 1, b: 0 };
+        next[x][y] = { a: 1, b: 0 };
+      }
     }
   }
 
   // hier starten we met de Chemicaliën b toe te voegen
   //in een klein plekje van 10 op 10
   // je kan hier met spelen, vorm veranderen, evnt met silhouetten werken
-  //
-  //for (var i = 100; i < 300; i++) {
+  // for (var i = 100; i < 300; i++) {
   //   for (var j = 100; j < 300; j++) {
   //     grid[i][j].b = 1;
   //     //console.log();
@@ -91,9 +90,9 @@ function draw() {
       var b = grid[x][y].b;
       var c = (a - b) * 255;
       c = constrain(c, 0, 255);
-      pixels[pix + 0] = 255;
+      pixels[pix + 0] = c;
       pixels[pix + 1] = c;
-      pixels[pix + 2] = c;
+      pixels[pix + 2] = 255;
       pixels[pix + 3] = 255;
     }
   }
@@ -140,21 +139,35 @@ function swap() {
   next = temp;
 }
 
-let isMouseDouwn = false;
+let isMouseDown = false;
 
-function onMouseDown() {
-  isMouseDouwn = true;
+function onMouseDown(e) {
+  e.preventDefault();
+  isMouseDown = true;
 }
 
 function onMouseUp() {
-  isMouseDouwn = false;
+  isMouseDown = false;
 }
 
 function onMouseMove(event) {
-  if (!isMouseDouwn) return;
+  console.log(event.shiftKey);
+  if (!isMouseDown) return;
+
   const mouseX = event.offsetX;
   const mouseY = event.offsetY;
-  grid[mouseX][mouseY].b = 1;
+
+  for (var i = mouseX - 10; i < mouseX + 10; i++) {
+    for (var j = mouseY - 10; j < mouseY + 10; j++) {
+      if (i < 0 || i >= width || j < 0 || j >= height) continue;
+      if (event.shiftKey) {
+        grid[i][j].a = 1;
+        grid[i][j].b = 0;
+      } else {
+        grid[i][j].b = 1;
+      }
+    }
+  }
 }
 
 setup();
@@ -163,4 +176,4 @@ draw();
 canvas.addEventListener("mousedown", onMouseDown);
 canvas.addEventListener("mouseup", onMouseUp);
 canvas.addEventListener("mousemove", onMouseMove);
-//canvas.addEventListener("contextmenu", (e) => e.preventDefault());
+canvas.addEventListener("contextmenu", (e) => e.preventDefault());
