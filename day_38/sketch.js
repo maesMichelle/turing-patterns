@@ -90,11 +90,11 @@ function draw() {
       var a = grid[x][y].a;
       var b = grid[x][y].b;
       var c = (a - b) * 255;
-      c = constrain(c, c, 255);
-      pixels[pix + 0] = c;
-      pixels[pix + 1] = 100;
-      pixels[pix + 2] = 200;
-      pixels[pix + 3] = 255;
+      c = constrain(c, 0, 255);
+      pixels[pix + 0] = 0;
+      pixels[pix + 1] = 0;
+      pixels[pix + 2] = c;
+      pixels[pix + 3] = 220;
     }
   }
 
