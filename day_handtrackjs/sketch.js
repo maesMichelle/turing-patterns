@@ -12,7 +12,7 @@ var centerX;
 var centerY;
 
 const modelParams = {
-  flipHorizontal: false, // flip e.g for video
+  flipHorizontal: true, // flip e.g for video
   imageScaleFactor: 0.7, // reduce input image size for gains in speed.
   maxNumBoxes: 5, // maximum number of boxes to detect
   iouThreshold: 0.5, // ioU threshold for non-max suppression
@@ -34,25 +34,17 @@ handTrack.startVideo(video).then((status) => {
       { video: {} },
       (stream) => {
         video.srcObject = stream;
-        setInterval(runDetection, 10);
       },
       (err) => consome.lig(err)
     );
   }
 });
 
+let handPositions = [];
+
 function runDetection() {
   model.detect(video).then((predictions) => {
-    //var bbox = predictions[0];
-    //const minY = predictions[0].bbox[0];
-    //const minX = predictions[0].bbox[1];
-    //const maxY = predictions[0].bbox[2];
-    //const maxX = predictions[0].bbox[3];
-    //centerX = (maxX - minX) / 2;
-    //centerY = (maxY - minY) / 2;
-    console.log(predictions); //(predictions[0])
-    //console.log(centerX + ": michelle is geweldig :" + centerY);
-    model.renderPredictions(predictions, canvas, ctx, video);
+    handPositions = predictions;
   });
 }
 
@@ -111,7 +103,6 @@ function draw() {
   //background(51);
   //ctx.rect(200, 200, 10, 10);
   //ctx.fillStyle = (255, 0, 0);
-
   for (var i = 0; i < 2; i++) {
     for (var x = 1; x < width - 1; x++) {
       for (var y = 1; y < height - 1; y++) {
@@ -149,6 +140,29 @@ function draw() {
   ctx.putImageData(imageData, 0, 0);
 
   swap();
+
+  if (handPositions.length > 0) {
+    for (const hand of handPositions) {
+      // console.log(hand);
+      const [x, y, w, h] = hand.bbox;
+      let centerX = x + w / 2;
+      let centerY = y + h / 2;
+      centerX /= 640;
+      centerY /= 480;
+      centerX *= 1200;
+      centerY *= 1200;
+      centerX -= 200;
+      centerY -= 200;
+
+      ctx.fillRect(centerX - 5, centerY - 5, 10, 10);
+      drawRectOnGrid(Math.round(centerX), Math.round(centerY), true);
+    }
+  }
+
+  if (model) {
+    runDetection();
+  }
+
   window.requestAnimationFrame(draw);
 }
 
@@ -199,18 +213,20 @@ function onMouseUp() {
 }
 
 function onMouseMove(event) {
-  console.log(event.shiftKey);
+  // console.log(event.shiftKey);
   if (!isMouseDouwn) return;
 
   const mouseX = centerX; //event.offsetX;
   const mouseY = centerY; //event.offsetY;
 
-  for (var i = mouseX - 10; i < mouseX + 10; i++) {
-    for (var j = mouseY - 10; j < mouseY + 10; j++) {
-      if (i < 0 || i >= width || j < 0 || j >= height) continue;
-      //grid[i][j].b = 1;
+  drawRectOnGrid(mouseX, mouseY, event.shiftKey);
+}
 
-      if (event.shiftKey) {
+function drawRectOnGrid(x, y, addPixels) {
+  for (var i = x - 10; i < x + 10; i++) {
+    for (var j = y - 10; j < y + 10; j++) {
+      if (i < 0 || i >= width || j < 0 || j >= height) continue;
+      if (addPixels) {
         grid[i][j].a = 1;
         grid[i][j].b = 1;
       } else {
