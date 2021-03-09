@@ -12,7 +12,7 @@ const renderer = new THREE.WebGLRenderer({ canvas });
 renderer.setSize(800, 600);
 
 const textureLoader = new THREE.TextureLoader();
-const imgTexture = textureLoader.load("./img/vleugel.png", start);
+const imgTexture = textureLoader.load("./img/vleugel-klein.jpg", start);
 
 const vertexShader = `
 uniform mat4 modelMatrix;
