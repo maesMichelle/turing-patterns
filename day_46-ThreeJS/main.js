@@ -5,11 +5,11 @@ const gui = new dat.GUI();
 
 const scene = new THREE.Scene();
 
-const camera = new THREE.OrthographicCamera(-400, 400, 300, -300, 1, 100);
+const camera = new THREE.OrthographicCamera(-800, 800, 600, -600, 1, 100);
 
 const canvas = document.getElementById("c");
 const renderer = new THREE.WebGLRenderer({ canvas });
-renderer.setSize(800, 600);
+renderer.setSize(1600, 1200);
 
 const textureLoader = new THREE.TextureLoader();
 const imgTexture = textureLoader.load("./img/vleugel-klein.jpg", start);
@@ -47,7 +47,7 @@ varying vec2 vUv;
 vec4 laplace(vec2 uv) {
   vec4 sum = vec4(0.0);
   //center point
-  sum += texture2D(uTexture, uv) * -1.0;
+  sum += texture2D(uTexture, uv) * -0.99;
 
   //cross
   sum += texture2D(uTexture, uv - vec2(-1.0,  0.0) * uTexelSize) * 0.2;
@@ -85,7 +85,7 @@ void main() {
 }
 `;
 
-const geometry = new THREE.PlaneGeometry(800, 600);
+const geometry = new THREE.PlaneGeometry(1600, 1200);
 const material = new THREE.RawShaderMaterial({
   vertexShader,
   fragmentShader,
@@ -96,7 +96,7 @@ const material = new THREE.RawShaderMaterial({
     udB: { value: 0.3 },
     uFeed: { value: 0.02 },
     uKill: { value: 0.05 },
-    uTexelSize: { value: new THREE.Vector2(1 / 800, 1 / 600) },
+    uTexelSize: { value: new THREE.Vector2(1 / 1600, 1 / 1200) },
   },
   //wireframe: true,
 });
@@ -106,14 +106,14 @@ gui.add(material.uniforms.udB, "value").min(0).max(1).step(0.001).name("dB");
 gui
   .add(material.uniforms.uFeed, "value")
   .min(0)
-  .max(1)
-  .step(0.001)
+  .max(0.2)
+  .step(0.0001)
   .name("Feed");
 gui
   .add(material.uniforms.uKill, "value")
   .min(0)
-  .max(1)
-  .step(0.001)
+  .max(0.2)
+  .step(0.0001)
   .name("Kill");
 
 //const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
@@ -122,8 +122,8 @@ scene.add(plane);
 
 camera.position.z = 1;
 
-let targetA = new THREE.WebGLRenderTarget(800, 600);
-let targetB = new THREE.WebGLRenderTarget(800, 600);
+let targetA = new THREE.WebGLRenderTarget(1600, 1200);
+let targetB = new THREE.WebGLRenderTarget(1600, 1200);
 
 function swapRenderTargets() {
   let tmp = targetA;
