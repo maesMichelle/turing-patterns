@@ -87,7 +87,7 @@ export default class ReactionDiffusionLayer {
         udA: { value: 1.0 },
         udB: { value: 0.66 },
         uFeed: { value: 0.0421 },
-        uKill: { value: 0.724 },
+        uKill: { value: 0.0724 },
         uInfluence: { value: 0.35 },
         uTexelSize: { value: new THREE.Vector2(1 / width, 1 / height) },
       },
