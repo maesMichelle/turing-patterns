@@ -11,7 +11,7 @@ attribute vec2 uv;
 varying vec2 vUv;
 
 void main() {
-  gl_Position = projectionMatrix * viewMatrix * modelMatrix * vec4(position, 0.8);
+  gl_Position = projectionMatrix * viewMatrix * modelMatrix * vec4(position, 1.0);
   vUv = uv;
 }
 `;
@@ -20,42 +20,25 @@ const fragmentShader = `
 precision mediump float;
 
 uniform sampler2D uInputTexture;
-uniform sampler2D uColorTexture;
 
 varying vec2 vUv;
 
 void main() {
   vec2 uv = vUv;
+  uv.x = 1.0-uv.x;
   vec4 originalColor = texture2D(uInputTexture, uv);
-  float gray = (originalColor.r - originalColor.g);
-  // float gray = (originalColor.r + originalColor.g + originalColor.b) / 3.0;
-  // float gray = 0.22 * originalColor.r + 0.78 * originalColor.g + 0.67 * originalColor.b;
-  gray = clamp(gray, 0.0, 1.0);
-  gray = 1.0 - gray;
-  gl_FragColor = texture2D(uColorTexture, vec2(gray, 0.5));
-  // gl_FragColor = vec4(gray, gray, gray, 1.0);
+  gl_FragColor = originalColor;
 }
 `;
 
-export default class ColorMapLayer {
-  constructor(fileName) {
-    this.fileName = fileName;
-  }
-
+export default class MirrorLayer {
   async setup(width, height) {
-    this.colorTexture = null;
-    await new Promise((resolve) => {
-      const textureLoader = new THREE.TextureLoader();
-      this.colorTexture = textureLoader.load(this.fileName, resolve);
-    });
-
     // Setup the material
     this.material = new THREE.RawShaderMaterial({
       vertexShader,
       fragmentShader,
       uniforms: {
         uInputTexture: { value: null },
-        uColorTexture: { value: this.colorTexture },
       },
     });
 

@@ -6,6 +6,7 @@ import DifferenceLayer from "./layers/difference.js";
 import ImageLayer from "./layers/image.js";
 import ReactionDiffusionLayer from "./layers/reaction-diffusion.js";
 import WebcamLayer from "./layers/webcam.js";
+import MirrorLayer from "./layers/mirror.js";
 
 let canvas, camera, renderer, layers, mesh, material;
 
@@ -34,15 +35,16 @@ async function main() {
   mesh = new THREE.Mesh(geometry, material);
 
   const imageLayer = new ImageLayer("./img/roos-paars.png");
-  const colorMapLayer = new ColorMapLayer("./img/blauw-roos.png");
+  const colorMapLayer = new ColorMapLayer("./img/rood-wit.png");
   const reactionDiffusionLayer = new ReactionDiffusionLayer();
   const webcamLayer = new WebcamLayer();
   const differenceLayer = new DifferenceLayer();
+  const mirrorLayer = new MirrorLayer();
 
   //layers = [imageLayer, colorMapLayer];
   //layers = [webcamLayer, differenceLayer];
   //layers = [webcamLayer, differenceLayer, reactionDiffusionLayer];
-  layers = [webcamLayer, differenceLayer, reactionDiffusionLayer, colorMapLayer];
+  layers = [webcamLayer, mirrorLayer, differenceLayer, reactionDiffusionLayer, colorMapLayer];
   //layers = [imageLayer, reactionDiffusionLayer];
   //layers = [webcamLayer, colorMapLayer];
 

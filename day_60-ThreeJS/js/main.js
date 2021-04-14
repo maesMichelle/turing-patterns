@@ -34,19 +34,19 @@ async function main() {
   material = new THREE.MeshBasicMaterial({ color: "white" });
   mesh = new THREE.Mesh(geometry, material);
 
-  const imageLayer = new ImageLayer("./img/flower.jpg");
-  const colorMapLayer = new ColorMapLayer("./img/zw-wit.png");
+  const imageLayer = new ImageLayer("./img/bloem.jpg");
+  const colorMapLayer = new ColorMapLayer("./img/gr-ge.png");
   const reactionDiffusionLayer = new ReactionDiffusionLayer();
   const webcamLayer = new WebcamLayer();
   const differenceLayer = new DifferenceLayer();
   const mirrorLayer = new MirrorLayer();
 
-  // layers = [imageLayer, colorMapLayer];
-  // layers = [webcamLayer, differenceLayer];
-  // layers = [webcamLayer, differenceLayer, reactionDiffusionLayer];
   layers = [webcamLayer, mirrorLayer, differenceLayer, reactionDiffusionLayer, colorMapLayer];
-  // layers = [imageLayer, reactionDiffusionLayer];
-  // layers = [webcamLayer, colorMapLayer];
+  //layers = [webcamLayer, differenceLayer];
+  //layers = [webcamLayer, differenceLayer, reactionDiffusionLayer];
+  //layers = [webcamLayer, differenceLayer, reactionDiffusionLayer, colorMapLayer];
+  //layers = [imageLayer, reactionDiffusionLayer];
+  //layers = [webcamLayer, colorMapLayer];
 
   for (const layer of layers) {
     await layer.setup(width, height);

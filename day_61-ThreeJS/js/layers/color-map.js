@@ -11,7 +11,7 @@ attribute vec2 uv;
 varying vec2 vUv;
 
 void main() {
-  gl_Position = projectionMatrix * viewMatrix * modelMatrix * vec4(position, 0.8);
+  gl_Position = projectionMatrix * viewMatrix * modelMatrix * vec4(position, 0.9);
   vUv = uv;
 }
 `;
