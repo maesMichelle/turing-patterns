@@ -74,7 +74,9 @@ void main() {
 `;
 
 export default class ReactionDiffusionLayer {
-  constructor() {}
+  constructor(params) {
+    this.params = params;
+  }
 
   async setup(width, height) {
     // Setup the material
@@ -84,20 +86,20 @@ export default class ReactionDiffusionLayer {
       uniforms: {
         uTexture: { value: null },
         uDrawTexture: { value: null },
-        udA: { value: 1.0 },
-        udB: { value: 0.47 },
-        uFeed: { value: 0.0236 },
-        uKill: { value: 0.0616 },
-        uInfluence: { value: 0.15 },
+        udA: { value: this.params.dA },
+        udB: { value: this.params.dB },
+        uFeed: { value: this.params.feed },
+        uKill: { value: this.params.kill },
+        uInfluence: { value: this.params.influence },
         uTexelSize: { value: new THREE.Vector2(1 / width, 1 / height) },
       },
     });
 
-    gui.add(this.material.uniforms.udA, "value").min(0).max(1).step(0.01).name("dA");
-    gui.add(this.material.uniforms.udB, "value").min(0).max(1).step(0.01).name("dB");
-    gui.add(this.material.uniforms.uFeed, "value").min(0).max(0.1).step(0.0001).name("Feed");
-    gui.add(this.material.uniforms.uKill, "value").min(0).max(0.1).step(0.0001).name("Kill");
-    gui.add(this.material.uniforms.uInfluence, "value").min(0).max(0.5).step(0.01).name("Influence");
+    // gui.add(this.material.uniforms.udA, "value").min(0).max(1).step(0.01).name("dA");
+    // gui.add(this.material.uniforms.udB, "value").min(0).max(1).step(0.01).name("dB");
+    // gui.add(this.material.uniforms.uFeed, "value").min(0).max(0.1).step(0.0001).name("Feed");
+    // gui.add(this.material.uniforms.uKill, "value").min(0).max(0.1).step(0.0001).name("Kill");
+    // gui.add(this.material.uniforms.uInfluence, "value").min(0).max(0.5).step(0.01).name("Influence");
 
     this.targetA = new THREE.WebGLRenderTarget(width, height, { depthBuffer: false });
     this.targetB = new THREE.WebGLRenderTarget(width, height, { depthBuffer: false });

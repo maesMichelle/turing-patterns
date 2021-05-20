@@ -62,7 +62,7 @@ export default class ColorMapLayer {
       },
     });
 
-    gui.add(this.material.uniforms.uOpacity, "value").min(0).max(1).step(0.01).name("Opacity");
+    // gui.add(this.material.uniforms.uOpacity, "value").min(0).max(1).step(0.01).name("Opacity");
     const geometry = new THREE.PlaneGeometry(2, 2);
     this.mesh = new THREE.Mesh(geometry, this.material);
 

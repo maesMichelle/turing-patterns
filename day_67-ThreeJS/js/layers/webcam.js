@@ -34,6 +34,7 @@ export default class WebcamLayer {
     this.mesh = new THREE.Mesh(geometry, material);
     this.mesh.scale.y = 480 / 640;
     this.target = new THREE.WebGLRenderTarget(width, height, { depthBuffer: false });
+    console.log(this.target);
   }
 
   draw(renderer, camera) {

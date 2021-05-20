@@ -8,7 +8,54 @@ import ReactionDiffusionLayer from "./layers/reaction-diffusion.js";
 import WebcamLayer from "./layers/webcam.js";
 import MirrorLayer from "./layers/mirror.js";
 
-let canvas, camera, renderer, layers, mesh, material;
+let canvas, camera, renderer, mesh, material, scenes, activeSceneIndex;
+
+async function createScene1(width, height) {
+  const colorMapLayer = new ColorMapLayer("./img/vuur.png");
+  const reactionDiffusionLayer = new ReactionDiffusionLayer({
+    dA: 1.0,
+    dB: 0.47,
+    feed: 0.0236,
+    kill: 0.0616,
+    influence: 0.15,
+  });
+
+  const webcamLayer = new WebcamLayer();
+  const differenceLayer = new DifferenceLayer();
+  const mirrorLayer = new MirrorLayer();
+
+  const layers = [webcamLayer, mirrorLayer, differenceLayer, reactionDiffusionLayer, colorMapLayer];
+
+  for (const layer of layers) {
+    await layer.setup(width, height);
+  }
+  return {
+    name: "scene1",
+    layers,
+  };
+}
+
+async function createScene2(width, height) {
+  const colorMapLayer = new ColorMapLayer("./img/bliksem.png");
+  const reactionDiffusionLayer = new ReactionDiffusionLayer({
+    dA: 1.0,
+    dB: 0.1,
+    feed: 0.0236,
+    kill: 0.0616,
+    influence: 0.5,
+  });
+  const webcamLayer = new WebcamLayer();
+  const differenceLayer = new DifferenceLayer();
+  const layers = [webcamLayer, differenceLayer, reactionDiffusionLayer, colorMapLayer];
+
+  for (const layer of layers) {
+    await layer.setup(width, height);
+  }
+  return {
+    name: "scene2",
+    layers,
+  };
+}
 
 async function main() {
   canvas = document.getElementById("c");
@@ -34,28 +81,18 @@ async function main() {
   material = new THREE.MeshBasicMaterial({ color: "white" });
   mesh = new THREE.Mesh(geometry, material);
 
-  const imageLayer = new ImageLayer("./img/bloem.jpg");
-  const colorMapLayer = new ColorMapLayer("./img/vuur.png");
-  const reactionDiffusionLayer = new ReactionDiffusionLayer();
-  const webcamLayer = new WebcamLayer();
-  const differenceLayer = new DifferenceLayer();
-  const mirrorLayer = new MirrorLayer();
-
-  layers = [webcamLayer, mirrorLayer, differenceLayer, reactionDiffusionLayer, colorMapLayer];
-  //layers = [webcamLayer, differenceLayer];
-  //layers = [webcamLayer, differenceLayer, reactionDiffusionLayer];
-  //layers = [webcamLayer, differenceLayer, reactionDiffusionLayer, colorMapLayer];
-  //layers = [imageLayer, reactionDiffusionLayer];
-  //layers = [webcamLayer, colorMapLayer];
-
-  for (const layer of layers) {
-    await layer.setup(width, height);
-  }
+  // Scenes
+  scenes = [];
+  scenes.push(await createScene1(width, height));
+  scenes.push(await createScene2(width, height));
+  activeSceneIndex = 0;
 
   requestAnimationFrame(animate);
 }
 
 function animate(elapsedTime) {
+  const activeScene = scenes[activeSceneIndex];
+  const layers = activeScene.layers;
   for (let i = 0; i < layers.length; i++) {
     layers[i].draw(renderer, camera, elapsedTime, layers[i - 1]);
   }
@@ -69,5 +106,30 @@ function animate(elapsedTime) {
   requestAnimationFrame(animate);
 }
 
+function switchScene() {
+  const oldScene = scenes[activeSceneIndex];
+  const oldLayers = oldScene.layers;
+  const oldColorMapLayer = oldLayers[oldLayers.length - 1];
+
+  let newSceneIndex = activeSceneIndex + 1;
+  if (newSceneIndex >= scenes.length) {
+    newSceneIndex = 0;
+  }
+
+  const newScene = scenes[newSceneIndex];
+  const newLayers = newScene.layers;
+  const newColorMapLayer = newLayers[newLayers.length - 1];
+
+  const timeline = gsap.timeline();
+  timeline.to(oldColorMapLayer.material.uniforms.uOpacity, { value: 0, duration: 3 });
+  timeline.add(() => {
+    console.log("switch");
+    activeSceneIndex = newSceneIndex;
+  });
+  timeline.set(newColorMapLayer.material.uniforms.uOpacity, { value: 0 });
+  timeline.to(newColorMapLayer.material.uniforms.uOpacity, { value: 1, duration: 3 });
+}
+
 main();
-// window.addEventListener("click", animate);
+window.addEventListener("dblclick", switchScene);
+// window.setInterval(switchScene,  5 * 60 * 1000);
