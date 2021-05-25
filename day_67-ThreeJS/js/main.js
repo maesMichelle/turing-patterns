@@ -36,17 +36,19 @@ async function createScene1(width, height) {
 }
 
 async function createScene2(width, height) {
-  const colorMapLayer = new ColorMapLayer("./img/bliksem.png");
+  const colorMapLayer = new ColorMapLayer("./img/gr-ge.png");
   const reactionDiffusionLayer = new ReactionDiffusionLayer({
     dA: 1.0,
-    dB: 0.1,
-    feed: 0.0236,
-    kill: 0.0616,
-    influence: 0.5,
+    dB: 0.16,
+    feed: 0.035,
+    kill: 0.068,
+    influence: 0.08,
   });
   const webcamLayer = new WebcamLayer();
   const differenceLayer = new DifferenceLayer();
-  const layers = [webcamLayer, differenceLayer, reactionDiffusionLayer, colorMapLayer];
+  const mirrorLayer = new MirrorLayer();
+
+  const layers = [webcamLayer, mirrorLayer, differenceLayer, reactionDiffusionLayer, colorMapLayer];
 
   for (const layer of layers) {
     await layer.setup(width, height);
