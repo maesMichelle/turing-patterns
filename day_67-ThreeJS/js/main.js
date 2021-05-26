@@ -42,7 +42,7 @@ async function createScene2(width, height) {
     dB: 0.16,
     feed: 0.035,
     kill: 0.068,
-    influence: 0.08,
+    influence: 0.2,
   });
   const webcamLayer = new WebcamLayer();
   const differenceLayer = new DifferenceLayer();
