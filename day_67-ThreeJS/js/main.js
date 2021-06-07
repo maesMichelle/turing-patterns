@@ -134,4 +134,10 @@ function switchScene() {
 
 main();
 window.addEventListener("dblclick", switchScene);
+window.addEventListener("keydown", (e) => {
+  if (e.key === "E") {
+    switchScene();
+  }
+});
+//(e switchScene);
 // window.setInterval(switchScene,  5 * 60 * 1000);

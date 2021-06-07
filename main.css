@@ -1,24 +1,123 @@
+* {
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+img {
+  max-width: 100%;
+}
+
 body {
   background-color: rgb(113, 147, 179);
   font-family: "Titillium Web", sans-serif;
   margin: 0;
 }
+
+/*** HEADER ***/
+
 .header {
-  color: rgb(255, 237, 220);
-  padding: 30px;
-}
-.titel {
-  font-size: 7vh;
-  font-weight: bold;
   text-align: center;
+  color: white;
+  position: relative;
 }
+
+.gif {
+  max-width: 100%;
+  left: 0px;
+  top: 0px;
+}
+
+.navigatie {
+  display: flex;
+  align-items: baseline;
+  position: absolute;
+  top: 0vh;
+  justify-content: space-between;
+  width: 100vw;
+}
+
+.titel {
+  font-size: 15vh;
+  font-weight: bold;
+  text-align: left !important;
+  padding-left: 6vh;
+  margin: 0;
+}
+
+.tabs {
+  display: flex;
+  padding-left: 50px;
+}
+
+.tabs__info {
+  list-style: none;
+  padding-right: 6vh;
+}
+
+.tab-text {
+  text-align: right !important;
+  font-size: 20px;
+  font-weight: normal;
+  text-decoration: none;
+  color: white;
+  padding-left: 20px;
+}
+
+.tab-text:hover {
+  text-decoration: underline;
+  transition: 0.5s ease;
+}
+
+/*** BODY ***/
+
+.section {
+  position: relative;
+}
+
+.t-titel {
+  font-size: 6vh;
+  font-weight: bold;
+  margin: 20px;
+  padding-top: 20px;
+  color: rgb(255, 255, 255);
+}
+
+/*** INSPIRATIE ***/
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  padding-left: 20px;
+  padding-right: 20px;
+}
+.gallery-row {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.gallery-img {
+  filter: grayscale(100%);
+  padding: 3px;
+  opacity: 50%;
+  height: 6.5vh;
+}
+
+.gallery-img:hover {
+  filter: grayscale(0%);
+  opacity: 100%;
+}
+
+/*** EXPERIMENTEN ***/
 
 .links {
   list-style-type: none;
-  display: inline-grid;
-  grid-template-columns: repeat(7, auto);
-  grid-gap: 1vh;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(20vh, 1fr));
+  grid-gap: 6px;
   margin-left: 20px;
+  margin-right: 20px;
 }
 
 h2 {
@@ -26,24 +125,17 @@ h2 {
   font-weight: bold;
   margin: 20px;
   padding-top: 20px;
-  color: rgb(255, 237, 220);
+  color: rgb(255, 255, 255);
 }
 
-/*a {
-  text-decoration: none;
-  color: rgba(0, 0, 253, 0.247);
-  font-weight: bold;
-  font-size: 15px;
-  padding: 5px;
-}*/
-
 .image {
-  height: 20vh;
+  width: max-content;
   opacity: 40%;
 }
 
 .image:hover {
   opacity: 100%;
+  width: 30vh;
 }
 
 p {
@@ -54,8 +146,11 @@ p {
   padding: 0px;
   margin: 0;
 }
+
+/*** FOOTER ***/
+
 .footer {
-  color: rgb(255, 237, 220);
+  color: rgb(255, 255, 255);
   padding-right: 40px;
   justify-content: space-between;
   align-items: center;
