@@ -85,28 +85,59 @@ body {
 /*** INSPIRATIE ***/
 
 .gallery {
-  display: grid;
-  grid-template-columns: repeat(2, auto);
   padding-left: 20px;
   padding-right: 20px;
 }
+
 .gallery-row {
   display: flex;
-  width: 100%;
-  flex-direction: row;
   flex-wrap: wrap;
 }
 
+.gallery-column {
+  flex: 12.5%;
+  max-width: 12.5%;
+}
+
+/*** gallery layout ***/
+
+.gallery__link {
+  position: relative;
+}
+
 .gallery-img {
-  filter: grayscale(100%);
   padding: 3px;
+  vertical-align: middle;
+  width: 100%;
   opacity: 50%;
-  height: 6.5vh;
+}
+
+.caption {
+  position: absolute;
+  bottom: 0;
+  background: rgb(0, 0, 0);
+  background: rgba(0, 0, 0, 0.5); /* Black see-through */
+  color: #f1f1f1;
+  width: 100%;
+  transition: 0.5s ease;
+  opacity: 0;
+  color: white;
+  font-size: 20px;
+  padding: 20px;
+  text-align: center;
 }
 
 .gallery-img:hover {
   filter: grayscale(0%);
   opacity: 100%;
+  transform: scale(1.6);
+  transition: 0.5s;
+  overflow: hidden;
+}
+
+.gallery__link:hover .caption {
+  opacity: 1;
+  transform: scale(1.6);
 }
 
 /*** EXPERIMENTEN ***/
@@ -115,7 +146,6 @@ body {
   list-style-type: none;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(20vh, 1fr));
-  grid-gap: 6px;
   margin-left: 20px;
   margin-right: 20px;
 }
@@ -130,6 +160,8 @@ h2 {
 
 .image {
   width: max-content;
+  vertical-align: middle;
+  padding: 3px;
   opacity: 40%;
 }
 

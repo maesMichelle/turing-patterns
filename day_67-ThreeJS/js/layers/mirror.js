@@ -25,10 +25,10 @@ varying vec2 vUv;
 
 void main() {
   vec2 uv = vUv;
-  uv.x = 1.0-uv.x;
-  //if (uv.x > 0.5) {
-    //uv.x = 1.0-uv.x;
-  //}
+  //uv.x = 1.0-uv.x;
+  if (uv.x > 0.5) {
+    uv.x = 1.0-uv.x;
+  }
   vec4 originalColor = texture2D(uInputTexture, uv);
   gl_FragColor = originalColor;
 }

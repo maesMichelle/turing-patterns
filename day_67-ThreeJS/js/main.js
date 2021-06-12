@@ -5,19 +5,21 @@ import ColorMapLayer from "./layers/color-map.js";
 import DifferenceLayer from "./layers/difference.js";
 import ImageLayer from "./layers/image.js";
 import ReactionDiffusionLayer from "./layers/reaction-diffusion.js";
+import ReactionDiffusionTexLayer from "./layers/reaction-diffusion-tex.js";
+import ReactionDiffusionCrulLayer from "./layers/reaction-diffusion-crul.js";
 import WebcamLayer from "./layers/webcam.js";
 import MirrorLayer from "./layers/mirror.js";
 
 let canvas, camera, renderer, mesh, material, scenes, activeSceneIndex;
 
 async function createScene1(width, height) {
-  const colorMapLayer = new ColorMapLayer("./img/vuur.png");
+  const colorMapLayer = new ColorMapLayer("./img/wi-ge-zw.png");
   const reactionDiffusionLayer = new ReactionDiffusionLayer({
     dA: 1.0,
     dB: 0.47,
-    feed: 0.0236,
-    kill: 0.0616,
-    influence: 0.15,
+    feed: 0.0256,
+    kill: 0.06,
+    influence: 0.1,
   });
 
   const webcamLayer = new WebcamLayer();
@@ -40,9 +42,129 @@ async function createScene2(width, height) {
   const reactionDiffusionLayer = new ReactionDiffusionLayer({
     dA: 1.0,
     dB: 0.16,
-    feed: 0.035,
-    kill: 0.068,
-    influence: 0.2,
+    feed: 0.0345,
+    kill: 0.0681,
+    influence: 0.15,
+  });
+  const webcamLayer = new WebcamLayer();
+  const differenceLayer = new DifferenceLayer();
+  const mirrorLayer = new MirrorLayer();
+
+  const layers = [webcamLayer, differenceLayer, reactionDiffusionLayer, colorMapLayer];
+
+  for (const layer of layers) {
+    await layer.setup(width, height);
+  }
+  return {
+    name: "scene2",
+    layers,
+  };
+}
+
+async function createScene3(width, height) {
+  const colorMapLayer = new ColorMapLayer("./img/z-b-g-w.png");
+  const reactionDiffusionLayer = new ReactionDiffusionLayer({
+    dA: 1.0,
+    dB: 1.0,
+    feed: 0.025,
+    kill: 0.0581,
+    influence: 0.1,
+  });
+  const webcamLayer = new WebcamLayer();
+  const differenceLayer = new DifferenceLayer();
+  const mirrorLayer = new MirrorLayer();
+
+  const layers = [webcamLayer, differenceLayer, reactionDiffusionLayer, colorMapLayer];
+
+  for (const layer of layers) {
+    await layer.setup(width, height);
+  }
+  return {
+    name: "scene3",
+    layers,
+  };
+}
+
+async function createScene4(width, height) {
+  const colorMapLayer = new ColorMapLayer("./img/zw-wit.png");
+  const reactionDiffusionTexLayer = new ReactionDiffusionTexLayer({
+    dA: 0.87,
+    dB: 0.45,
+    feed: 0.0171,
+    kill: 0.0778,
+    influence: 0.15,
+  });
+  const webcamLayer = new WebcamLayer();
+  const differenceLayer = new DifferenceLayer();
+  const mirrorLayer = new MirrorLayer();
+
+  const layers = [webcamLayer, differenceLayer, reactionDiffusionTexLayer, colorMapLayer];
+
+  for (const layer of layers) {
+    await layer.setup(width, height);
+  }
+  return {
+    name: "scene4",
+    layers,
+  };
+}
+
+async function createScene5(width, height) {
+  const colorMapLayer = new ColorMapLayer("./img/test.png");
+  const reactionDiffusionLayer = new ReactionDiffusionLayer({
+    dA: 1.0,
+    dB: 0.47,
+    feed: 0.0236,
+    kill: 0.0616,
+    influence: 0.08,
+  });
+  const webcamLayer = new WebcamLayer();
+  const differenceLayer = new DifferenceLayer();
+  const mirrorLayer = new MirrorLayer();
+
+  const layers = [webcamLayer, differenceLayer, reactionDiffusionLayer, colorMapLayer];
+
+  for (const layer of layers) {
+    await layer.setup(width, height);
+  }
+  return {
+    name: "scene5",
+    layers,
+  };
+}
+
+async function createScene6(width, height) {
+  const colorMapLayer = new ColorMapLayer("./img/afb2.png");
+  const reactionDiffusionCrulLayer = new ReactionDiffusionCrulLayer({
+    dA: 1.0,
+    dB: 1.0,
+    feed: 0.02,
+    kill: 0.0581,
+    influence: 0.1,
+  });
+  const webcamLayer = new WebcamLayer();
+  const differenceLayer = new DifferenceLayer();
+  const mirrorLayer = new MirrorLayer();
+
+  const layers = [webcamLayer, differenceLayer, reactionDiffusionCrulLayer, colorMapLayer];
+
+  for (const layer of layers) {
+    await layer.setup(width, height);
+  }
+  return {
+    name: "scene6",
+    layers,
+  };
+}
+
+async function createScene7(width, height) {
+  const colorMapLayer = new ColorMapLayer("./img/afb4.png");
+  const reactionDiffusionLayer = new ReactionDiffusionLayer({
+    dA: 0.7,
+    dB: 0.3,
+    feed: 0.0204,
+    kill: 0.0583,
+    influence: 0.14,
   });
   const webcamLayer = new WebcamLayer();
   const differenceLayer = new DifferenceLayer();
@@ -54,7 +176,31 @@ async function createScene2(width, height) {
     await layer.setup(width, height);
   }
   return {
-    name: "scene2",
+    name: "scene7",
+    layers,
+  };
+}
+
+async function createScene8(width, height) {
+  const colorMapLayer = new ColorMapLayer("./img/afb5.png");
+  const reactionDiffusionLayer = new ReactionDiffusionLayer({
+    dA: 1.0,
+    dB: 0.3,
+    feed: 0.02,
+    kill: 0.0581,
+    influence: 0.08,
+  });
+  const webcamLayer = new WebcamLayer();
+  const differenceLayer = new DifferenceLayer();
+  const mirrorLayer = new MirrorLayer();
+
+  const layers = [webcamLayer, differenceLayer, reactionDiffusionLayer, colorMapLayer];
+
+  for (const layer of layers) {
+    await layer.setup(width, height);
+  }
+  return {
+    name: "scene8",
     layers,
   };
 }
@@ -85,8 +231,15 @@ async function main() {
 
   // Scenes
   scenes = [];
+  scenes.push(await createScene4(width, height));
+  scenes.push(await createScene8(width, height));
+  scenes.push(await createScene6(width, height));
   scenes.push(await createScene1(width, height));
+  scenes.push(await createScene3(width, height));
+  scenes.push(await createScene5(width, height));
   scenes.push(await createScene2(width, height));
+  scenes.push(await createScene7(width, height));
+
   activeSceneIndex = 0;
 
   requestAnimationFrame(animate);
@@ -123,13 +276,13 @@ function switchScene() {
   const newColorMapLayer = newLayers[newLayers.length - 1];
 
   const timeline = gsap.timeline();
-  timeline.to(oldColorMapLayer.material.uniforms.uOpacity, { value: 0, duration: 3 });
+  timeline.to(oldColorMapLayer.material.uniforms.uOpacity, { value: 0, duration: 1 });
   timeline.add(() => {
     console.log("switch");
     activeSceneIndex = newSceneIndex;
   });
   timeline.set(newColorMapLayer.material.uniforms.uOpacity, { value: 0 });
-  timeline.to(newColorMapLayer.material.uniforms.uOpacity, { value: 1, duration: 3 });
+  timeline.to(newColorMapLayer.material.uniforms.uOpacity, { value: 1, duration: 1 });
 }
 
 main();
