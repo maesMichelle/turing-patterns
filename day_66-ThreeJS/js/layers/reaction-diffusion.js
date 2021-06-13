@@ -33,7 +33,7 @@ varying vec2 vUv;
 vec4 laplace(vec2 uv) {
   vec4 sum = vec4(0.0);
   // Center point
-  sum += texture2D(uTexture, uv) * -0.999;
+  sum += texture2D(uTexture, uv) * -1.0;
 
   // Cross
   sum += texture2D(uTexture, uv - vec2(-1.0,  0.0) * uTexelSize) * 0.2;

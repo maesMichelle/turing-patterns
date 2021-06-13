@@ -35,7 +35,7 @@ async function main() {
   mesh = new THREE.Mesh(geometry, material);
 
   const imageLayer = new ImageLayer("./img/bloem.jpg");
-  const colorMapLayer = new ColorMapLayer("./img/vis.png");
+  const colorMapLayer = new ColorMapLayer("./img/wi-ge-zw.png");
   const reactionDiffusionLayer = new ReactionDiffusionLayer();
   const webcamLayer = new WebcamLayer();
   const differenceLayer = new DifferenceLayer();

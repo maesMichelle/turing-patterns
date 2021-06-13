@@ -82,64 +82,6 @@ body {
   color: rgb(255, 255, 255);
 }
 
-/*** INSPIRATIE ***/
-
-.gallery {
-  padding-left: 20px;
-  padding-right: 20px;
-}
-
-.gallery-row {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.gallery-column {
-  flex: 12.5%;
-  max-width: 12.5%;
-}
-
-/*** gallery layout ***/
-
-.gallery__link {
-  position: relative;
-}
-
-.gallery-img {
-  padding: 3px;
-  vertical-align: middle;
-  width: 100%;
-  opacity: 50%;
-}
-
-.caption {
-  position: absolute;
-  bottom: 0;
-  background: rgb(0, 0, 0);
-  background: rgba(0, 0, 0, 0.5); /* Black see-through */
-  color: #f1f1f1;
-  width: 100%;
-  transition: 0.5s ease;
-  opacity: 0;
-  color: white;
-  font-size: 20px;
-  padding: 20px;
-  text-align: center;
-}
-
-.gallery-img:hover {
-  filter: grayscale(0%);
-  opacity: 100%;
-  transform: scale(1.6);
-  transition: 0.5s;
-  overflow: hidden;
-}
-
-.gallery__link:hover .caption {
-  opacity: 1;
-  transform: scale(1.6);
-}
-
 /*** EXPERIMENTEN ***/
 
 .links {
@@ -161,7 +103,7 @@ h2 {
 .image {
   width: max-content;
   vertical-align: middle;
-  padding: 3px;
+  padding: 10px;
   opacity: 40%;
 }
 
@@ -178,6 +120,68 @@ p {
   padding: 0px;
   margin: 0;
 }
+
+/*** INSPIRATIE ***/
+
+.gallery {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.gallery-row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.gallery-column {
+  flex: 12.5%;
+  max-width: 12.5%;
+}
+
+/*** gallery layout ***/
+
+.gallery__link {
+  position: relative;
+}
+
+.gallery-img {
+  padding: 10px;
+  vertical-align: middle;
+  width: 100%;
+  filter: grayscale(100%);
+  opacity: 50%;
+}
+
+.caption {
+  position: absolute;
+  bottom: 0;
+  background: rgb(0, 0, 0);
+  background: rgba(0, 0, 0, 0.5); /* Black see-through */
+  color: #f1f1f1;
+  width: 100%;
+  transition: 0.5s ease;
+  opacity: 0;
+  color: white;
+  font-size: 16px;
+  padding: 18px;
+  text-align: left;
+}
+
+.gallery__link:hover {
+  overflow: hidden;
+}
+
+.gallery-img:hover {
+  transition: 0.5s;
+  opacity: 100%;
+  filter: grayscale(0);
+  transform: scale(1.2);
+  overflow: hidden;
+}
+
+.gallery__link:hover .caption {
+  opacity: 1;
+  
 
 /*** FOOTER ***/
 
