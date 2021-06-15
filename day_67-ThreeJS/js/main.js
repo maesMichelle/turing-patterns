@@ -13,13 +13,13 @@ import MirrorLayer from "./layers/mirror.js";
 let canvas, camera, renderer, mesh, material, scenes, activeSceneIndex;
 
 async function createScene1(width, height) {
-  const colorMapLayer = new ColorMapLayer("./img/wi-ge-zw.png");
+  const colorMapLayer = new ColorMapLayer("./img/afb6-1.png");
   const reactionDiffusionLayer = new ReactionDiffusionLayer({
     dA: 1.0,
     dB: 0.47,
     feed: 0.0256,
     kill: 0.06,
-    influence: 0.1,
+    influence: 0.2,
   });
 
   const webcamLayer = new WebcamLayer();
@@ -44,7 +44,7 @@ async function createScene2(width, height) {
     dB: 0.16,
     feed: 0.0345,
     kill: 0.0681,
-    influence: 0.15,
+    influence: 0.3,
   });
   const webcamLayer = new WebcamLayer();
   const differenceLayer = new DifferenceLayer();
@@ -64,11 +64,11 @@ async function createScene2(width, height) {
 async function createScene3(width, height) {
   const colorMapLayer = new ColorMapLayer("./img/z-b-g-w.png");
   const reactionDiffusionLayer = new ReactionDiffusionLayer({
-    dA: 1.0,
-    dB: 1.0,
-    feed: 0.025,
+    dA: 0.88,
+    dB: 0.46,
+    feed: 0.028,
     kill: 0.0581,
-    influence: 0.1,
+    influence: 0.18,
   });
   const webcamLayer = new WebcamLayer();
   const differenceLayer = new DifferenceLayer();
@@ -92,7 +92,7 @@ async function createScene4(width, height) {
     dB: 0.45,
     feed: 0.0171,
     kill: 0.0778,
-    influence: 0.15,
+    influence: 0.18,
   });
   const webcamLayer = new WebcamLayer();
   const differenceLayer = new DifferenceLayer();
@@ -116,7 +116,7 @@ async function createScene5(width, height) {
     dB: 0.47,
     feed: 0.0236,
     kill: 0.0616,
-    influence: 0.08,
+    influence: 0.2,
   });
   const webcamLayer = new WebcamLayer();
   const differenceLayer = new DifferenceLayer();
@@ -140,7 +140,7 @@ async function createScene6(width, height) {
     dB: 1.0,
     feed: 0.02,
     kill: 0.0581,
-    influence: 0.1,
+    influence: 0.2,
   });
   const webcamLayer = new WebcamLayer();
   const differenceLayer = new DifferenceLayer();
@@ -164,7 +164,7 @@ async function createScene7(width, height) {
     dB: 0.3,
     feed: 0.0204,
     kill: 0.0583,
-    influence: 0.14,
+    influence: 0.2,
   });
   const webcamLayer = new WebcamLayer();
   const differenceLayer = new DifferenceLayer();
@@ -182,13 +182,13 @@ async function createScene7(width, height) {
 }
 
 async function createScene8(width, height) {
-  const colorMapLayer = new ColorMapLayer("./img/afb5.png");
+  const colorMapLayer = new ColorMapLayer("./img/afb5-1.png");
   const reactionDiffusionLayer = new ReactionDiffusionLayer({
     dA: 1.0,
     dB: 0.3,
     feed: 0.02,
     kill: 0.0581,
-    influence: 0.08,
+    influence: 0.18,
   });
   const webcamLayer = new WebcamLayer();
   const differenceLayer = new DifferenceLayer();

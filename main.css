@@ -13,7 +13,7 @@ body {
   margin: 0;
 }
 
-/*** HEADER ***/
+/*** HEADER <img class="achtergrond" src="web-image/ achtergrond.JPG" alt="" /> ***/
 
 .header {
   text-align: center;
@@ -23,50 +23,61 @@ body {
 
 .gif {
   overflow-y: hidden;
-  max-width: 100%;
+  max-height: 100%;
   left: 0px;
   top: 0px;
+  padding-top: 0px;
 }
 
 .navigatie {
   display: flex;
-  align-items: baseline;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
   position: absolute;
   top: 0vh;
-  justify-content: space-between;
-  width: 100vw;
+  width: 100%;
+  margin-top: 20px;
 }
 
 .titel {
   font-size: 15vh;
-  font-weight: bold;
-  text-align: left !important;
-  padding-left: 6vh;
+  font-weight: lighter;
+  text-align: center;
+  padding-left: 0;
   margin: 0;
 }
 
 .tabs {
   display: flex;
-  padding-left: 50px;
 }
 
 .tabs__info {
   list-style: none;
-  padding-right: 6vh;
 }
 
 .tab-text {
-  text-align: right !important;
-  font-size: 20px;
+  text-align: center;
+  font-size: 2vh;
   font-weight: normal;
   text-decoration: none;
   color: white;
-  padding-left: 20px;
+  padding-left: 25px;
+  padding-right: 25px;
 }
 
 .tab-text:hover {
   text-decoration: underline;
   transition: 0.5s ease;
+}
+
+.vraag {
+  align-items: center;
+  font-size: 18px;
+  font-weight: bold;
+  text-decoration: none;
+  color: white;
+  padding-top: 220px;
 }
 
 /*** BODY ***/
@@ -77,26 +88,52 @@ body {
 }
 
 .t-titel {
-  font-size: 10vh;
-  font-weight: bold;
-  margin: 20px;
-  margin-left: 6vw;
+  font-size: 4vh;
+  font-weight: normal;
+  margin-left: 1vw;
   text-decoration: none;
   color: rgb(255, 255, 255);
 }
 
 /*** PROJECT ***/
 .fotobook {
-  list-style-type: none;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(20vw, 1fr));
-  grid-gap: 6px;
-  margin-left: 6vw;
-  margin-right: 6vw;
+  margin-left: 1vw;
+  margin-right: 1vw;
+}
+
+.fotobook-row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.fotobook-column {
+  width: 25%;
+  max-width: 100%;
 }
 
 .image-kid {
-  width: 40vw;
+  padding: 3px;
+  display: block;
+  width: 100%;
+}
+
+.opstelling-galery {
+  display: grid;
+  grid-template-columns: repeat(4, auto);
+  height: auto;
+  grid-gap: 6px;
+  margin-left: 1vw;
+  margin-right: 1vw;
+}
+
+.opstelling-image {
+  object-fit: cover;
+  width: 100%;
+  height: 250px;
+}
+
+video {
+  object-fit: contain;
 }
 
 /*** EXPERIMENTEN ***/
@@ -104,18 +141,17 @@ body {
 .links {
   list-style-type: none;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(18vh, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(20vh, 1fr));
   grid-gap: 6px;
-  margin-left: 6vw;
-  margin-right: 6vw;
+  margin-left: 1vw;
+  margin-right: 1vw;
 }
 
 h2 {
-  font-size: 3vh;
-  font-weight: normal;
-  margin: 20px;
-  padding-top: 4vh;
-  padding-left: 6vw;
+  font-size: 2vh;
+  font-weight: lighter;
+  padding-top: 20px;
+  padding-left: 1vw;
   color: rgb(255, 255, 255);
 }
 
@@ -131,20 +167,11 @@ h2 {
   width: 30vh;
 }
 
-p {
-  text-decoration: none;
-  color: rgba(0, 0, 253, 0.247);
-  font-weight: normal;
-  font-size: 12px;
-  padding: 0px;
-  margin: 0;
-}
-
 /*** INSPIRATIE ***/
 
 .gallery {
-  padding-left: 6vw;
-  padding-right: 6vw;
+  padding-left: 1vw;
+  padding-right: 1vw;
 }
 
 .gallery-row {
@@ -174,9 +201,10 @@ p {
 .caption {
   position: absolute;
   bottom: 0;
+  margin-bottom: 3px;
   background: rgba(0, 0, 0, 0.5); /* Black see-through */
   color: white;
-  width: 100%;
+  width: 97%;
   transition: 0.5s ease;
   opacity: 0;
   color: white;
@@ -195,20 +223,28 @@ p {
   opacity: 1;
   transition: 0.5s ease;
 }
-/*** FOOTER ***/
+/*** FOOTER linear-gradient(0deg, rgba(113, 147, 179, 2.9) 0%, rgba(255, 255, 255, 0) 100%);***/
 
 .footer {
-  color: rgb(255, 255, 255);
-  padding-right: 40px;
-  justify-content: space-between;
-  align-items: center;
+  font-size: 15px;
+  padding: 20px;
+  overflow: hidden;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  z-index: 1;
+  background: rgb(113, 147, 179);
 }
 
-.naam {
-  position: relative;
-  font-size: 20px;
-  font-weight: bold;
+.footer-naam {
+  position: absolute;
+  text-align: left;
+  color: white;
+}
+
+.footer-titel {
   text-align: right;
-  padding-top: 20px;
-  padding-bottom: 20px;
+  position: relative;
+  text-decoration: none;
+  color: white;
 }
