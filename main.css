@@ -22,6 +22,7 @@ body {
 }
 
 .gif {
+  overflow-y: hidden;
   max-width: 100%;
   left: 0px;
   top: 0px;
@@ -72,14 +73,30 @@ body {
 
 .section {
   position: relative;
+  padding-top: 6vh;
 }
 
 .t-titel {
-  font-size: 6vh;
+  font-size: 10vh;
   font-weight: bold;
   margin: 20px;
-  padding-top: 20px;
+  margin-left: 6vw;
+  text-decoration: none;
   color: rgb(255, 255, 255);
+}
+
+/*** PROJECT ***/
+.fotobook {
+  list-style-type: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(20vw, 1fr));
+  grid-gap: 6px;
+  margin-left: 6vw;
+  margin-right: 6vw;
+}
+
+.image-kid {
+  width: 40vw;
 }
 
 /*** EXPERIMENTEN ***/
@@ -87,23 +104,25 @@ body {
 .links {
   list-style-type: none;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(20vh, 1fr));
-  margin-left: 20px;
-  margin-right: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(18vh, 1fr));
+  grid-gap: 6px;
+  margin-left: 6vw;
+  margin-right: 6vw;
 }
 
 h2 {
   font-size: 3vh;
-  font-weight: bold;
+  font-weight: normal;
   margin: 20px;
-  padding-top: 20px;
+  padding-top: 4vh;
+  padding-left: 6vw;
   color: rgb(255, 255, 255);
 }
 
 .image {
   width: max-content;
   vertical-align: middle;
-  padding: 10px;
+  padding: 0;
   opacity: 40%;
 }
 
@@ -124,8 +143,8 @@ p {
 /*** INSPIRATIE ***/
 
 .gallery {
-  padding-left: 10px;
-  padding-right: 10px;
+  padding-left: 6vw;
+  padding-right: 6vw;
 }
 
 .gallery-row {
@@ -142,47 +161,40 @@ p {
 
 .gallery__link {
   position: relative;
+  padding: 3px;
+  filter: grayscale(100%);
+  opacity: 50%;
 }
 
 .gallery-img {
-  padding: 10px;
   vertical-align: middle;
   width: 100%;
-  filter: grayscale(100%);
-  opacity: 50%;
 }
 
 .caption {
   position: absolute;
   bottom: 0;
-  background: rgb(0, 0, 0);
   background: rgba(0, 0, 0, 0.5); /* Black see-through */
-  color: #f1f1f1;
+  color: white;
   width: 100%;
   transition: 0.5s ease;
   opacity: 0;
   color: white;
   font-size: 16px;
-  padding: 18px;
+  padding: 10px;
   text-align: left;
 }
 
 .gallery__link:hover {
-  overflow: hidden;
-}
-
-.gallery-img:hover {
-  transition: 0.5s;
+  transition: 0.5s ease;
   opacity: 100%;
-  filter: grayscale(0);
-  transform: scale(1.2);
-  overflow: hidden;
+  filter: grayscale(0%);
 }
 
 .gallery__link:hover .caption {
   opacity: 1;
-  
-
+  transition: 0.5s ease;
+}
 /*** FOOTER ***/
 
 .footer {
