@@ -227,7 +227,9 @@ h2 {
 /*** FOOTER linear-gradient(0deg, rgba(113, 147, 179, 2.9) 0%, rgba(255, 255, 255, 0) 100%);***/
 
 .footer {
-  font-size: 15px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 16px;
   padding: 20px;
   overflow: hidden;
   position: fixed;
@@ -238,9 +240,24 @@ h2 {
 }
 
 .footer-naam {
-  position: absolute;
+  position: relative;
   text-align: left;
   color: white;
+}
+
+.foo-nav {
+  display: flex;
+}
+
+.footer-text {
+  padding-left: 10px;
+  padding-right: 10px;
+  text-decoration: none;
+  color: white;
+}
+.footer-text:hover {
+  text-decoration: underline;
+  transition: 0.5s ease;
 }
 
 .footer-titel {
