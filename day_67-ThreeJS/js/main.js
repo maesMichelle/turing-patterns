@@ -276,13 +276,13 @@ function switchScene() {
   const newColorMapLayer = newLayers[newLayers.length - 1];
 
   const timeline = gsap.timeline();
-  timeline.to(oldColorMapLayer.material.uniforms.uOpacity, { value: 0, duration: 1 });
+  timeline.to(oldColorMapLayer.material.uniforms.uOpacity, { value: 0, duration: 3 });
   timeline.add(() => {
     console.log("switch");
     activeSceneIndex = newSceneIndex;
   });
   timeline.set(newColorMapLayer.material.uniforms.uOpacity, { value: 0 });
-  timeline.to(newColorMapLayer.material.uniforms.uOpacity, { value: 1, duration: 1 });
+  timeline.to(newColorMapLayer.material.uniforms.uOpacity, { value: 1, duration: 3 });
 }
 
 main();
